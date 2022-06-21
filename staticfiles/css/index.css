@@ -1,0 +1,47 @@
+@charset "utf-8";
+
+.a8 {
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+}       
+
+.div1 {
+    margin-top: 80px;
+    padding: 0;
+}
+
+.div1 ul {
+    border-radius: 15px 15px 0 0;
+    text-align: center;
+    font-size: 150%;
+}
+
+.div2 {
+    background-color: white;
+}
+
+table tr {
+    border-bottom: 0.5px dotted gray;
+}
+
+table tr th {
+    text-align: center;
+    color: white;
+}
+
+table tr td:nth-child(1) {width: 10%;text-align: center;}
+
+table tr td.td1 {width: 55%;}
+table tr td.td2 {width: 23%;text-align: center;}
+table tr td.td3 {width: 12%;text-align: center;}
+
+table tr td.td4 {width: 70%;}
+table tr td.td5 {width: 24%;text-align: center;}
+table tr td.td6 {width: 6%;text-align: center;}
+
+table tr th {text-align: center;}
+
+.modal-title{
+    color: red;
+}

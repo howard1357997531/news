@@ -1,0 +1,78 @@
+{% extends 'news/base.html' %}
+{% load static %}
+{% block title %}<title>guest</title>{% endblock title %} 
+{% block css %}<link rel="stylesheet" href="{% static '/css/index.css' %}" type="text/css">{% endblock css %}
+
+{% block content %}
+{% include 'news/navbar.html' %}
+<div class="container div1">
+    <ul class="list-group">
+        <li class="list-group-item bg-info">新聞系統</li>
+    </ul>
+</div>
+<div class="container border pt-4 div2" style="border-radius: 0;">
+    <div id="accordion">
+        <table class="table table-borderless mb-0 a8">
+            <tr class="bg-secondary">
+                <th>分類</th>
+                <th>標題</th>
+                <th>時間</th>
+                <th>點閱</th>
+            </tr>
+            {% for new in news %}
+            <tr>
+                {% if new.category.name == '焦點' %}<td><span class="badge badge-danger p-2">【{{new.category.name}}】</span></td>{% endif %}
+                {% if new.category.name == '國際' %}<td><span class="badge badge-info p-2">【{{new.category.name}}】</span></td>{% endif %}
+                {% if new.category.name == '政治' %}<td><span class="badge badge-secondary p-2">【{{new.category.name}}】</span></td>{% endif %}
+                {% if new.category.name == '娛樂' %}<td><span class="badge badge-warning p-2">【{{new.category.name}}】</span></td>{% endif %}
+                {% if new.category.name == '運動' %}<td><span class="badge badge-primary p-2">【{{new.category.name}}】</span></td>{% endif %}
+                {% if new.category.name == '健康' %}<td><span class="badge badge-success p-2">【{{new.category.name}}】</span></td>{% endif %}
+                {% if new.category.name == '生活' %}<td><span class="badge badge-dark p-2">【{{new.category.name}}】</span></td>{% endif %}
+                <td class="td4">
+                    <a href="/detail/{{new.id}}">{{new.title}}</a>
+                </td>
+                <td class="td5">{{new.date_created|date:'Y/m/d '}}&nbsp;&nbsp;{{new.date_created|date:' h:i'}}</td>
+                <td class="td6">{{new.press}}</td>
+            </tr>      
+            {% endfor %}
+        </table>
+    </div>
+    {% if news.has_other_pages %}
+    <ul class="pagination justify-content-center my-4">
+        {% if news.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page={{news.previous_page_number}}" data-page="{{news.previous_page_number}}">&laquo</a></li>
+        <li class="page-item"><a class="page-link" href="?page=1" data-page="1">第一頁</a></li>
+        {% endif %}
+
+        {% for i in news.paginator.page_range %}
+            {% if news.number == i %}
+            <li class="page-item active"><a class="page-link">{{i}}</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{i}}" data-page="{{i}}">{{i}}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if news.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{news.paginator.num_pages}}" data-page="{{news.paginator.num_pages}}">最末頁</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{news.next_page_number}}" data-page="{{news.next_page_number}}" id="asd">&raquo</a></li>
+        {% endif %}
+    </ul>
+    {% endif %}
+</div>
+
+<script type="text/javascript">
+    let search_form = document.getElementById('search_form')
+	let pageLinks = document.getElementsByClassName('page-link')
+ 
+	for(var i=0; i < pageLinks.length; i++){
+        pageLinks[i].addEventListener('click', function(e){
+            e.preventDefault()
+            let page = this.dataset.page
+            console.log('Page:', page)  
+            search_form.innerHTML += `<input name='page' value='${page}' hidden>`
+            search_form.submit()
+            })
+        }
+</script>
+
+{% endblock content %}

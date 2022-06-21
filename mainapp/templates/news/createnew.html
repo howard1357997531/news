@@ -1,0 +1,59 @@
+{% extends 'news/base.html' %}
+{% load static %}
+{% load crispy_forms_tags%}
+{% block title %}<title>index</title>{% endblock title %} 
+{% block css %}<link rel="stylesheet" href="{% static '/css/createnew.css' %}" type="text/css">{% endblock css %}
+
+{% block content %}
+{% include 'news/navbar2.html' %}
+<div class="container div1">
+    <ul class="list-group">
+        <li class="list-group-item bg-info">新聞系統</li>
+    </ul>
+</div>
+<div class="container border pt-4 div2 clearfix" style="border-radius: 0;">
+    <form action="." method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.media}}     <!-- 才會顯示ckeditor -->
+        {{form|crispy}}
+        <button class="btn btn-outline-info float-right cnew" type="submit">送出</button>
+    </form>
+</div>
+
+<script type="text/javascript">
+    let label = document.getElementsByTagName('label')
+    label[0].innerHTML = '新聞種類 :'
+    label[0].style.fontSize = '1.2rem'
+
+    label[1].innerHTML = '主題 :'
+    label[1].style.fontSize = '1.2rem'
+
+    label[2].innerHTML = '內容 :'
+    label[2].style.fontSize = '1.2rem'
+
+    label[3].innerHTML = '選擇圖片'
+    label[3].className = "custom-file-label"
+    
+    label[4].innerHTML = '是否顯示 :'
+    label[4].className = "custom-control-label"
+
+    let option = document.getElementsByTagName('option')
+    option[0].innerHTML = '請選擇......'
+
+    document.getElementById('id_category').className = "custom-select"
+    document.getElementById('id_picture').className = "custom-file-input"
+
+    document.getElementById('div_id_picture').className = "custom-file"
+    document.getElementById('id_picture').className = "custom-file-input"
+
+    document.getElementById('div_id_enable').className = "custom-control custom-switch"
+    document.getElementById('id_enable').className = "custom-control-input"
+
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    
+</script>
+{% endblock content %}

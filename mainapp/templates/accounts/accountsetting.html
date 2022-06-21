@@ -1,0 +1,60 @@
+{% extends 'news/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}<title>index</title>{% endblock title %} 
+{% block css %}<link rel="stylesheet" href="{% static '/css/accountsetting.css' %}" type="text/css">{% endblock css %}
+
+{% block content %}
+{% include 'news/navbar2.html' %}
+<div class="container div1">
+    <ul class="list-group">
+        <li class="list-group-item bg-info">帳戶修改</li>
+    </ul>
+</div>
+<div class="container border pt-4 div2">
+    <img src="{{profile.pictureURL}}" alt="">
+    <form action="." method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class="btn btn-primary btn-block">送出</button>
+    </form>
+</div>
+<script type="text/javascript">
+    let label = document.getElementsByTagName('label')
+    label[0].innerHTML = '姓氏 :'
+    label[0].style.fontSize = '1.2rem'
+
+    label[1].innerHTML = '名字 :'
+    label[1].style.fontSize = '1.2rem'
+
+    label[2].innerHTML = '手機號碼 :'
+    label[2].style.fontSize = '1.2rem'
+
+    label[3].innerHTML = '電子郵件 :'
+    label[3].style.fontSize = '1.2rem'
+    
+    label[4].innerHTML = '地址 :'
+    label[4].style.fontSize = '1.2rem'
+
+    label[5].innerHTML = '照片 :'
+    label[5].style.fontSize = '1.2rem'
+
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    
+</script>
+{% endblock content %}
+        <!-- </label> <div> <input type="text" name="address" value="高雄市前鎮區二聖一路208號78樓" maxlength="200" class="textinput textInput form-control" id="id_address"> </div> </div> <div id="div_id_picture" class="form-group"> <label for="id_picture" class="">
+            Picture
+        </label> 
+        <div>
+            Currently: <a href="/images/cat5.jfif">cat5.jfif</a>
+            <input type="checkbox" name="picture-clear" id="picture-clear_id">
+            <label for="picture-clear_id">Clear</label><br>
+            Change:
+            <input type="file" name="picture" accept="image/*" class="clearablefileinput form-control-file" id="id_picture">
+        </div>
+        </div> -->

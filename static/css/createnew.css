@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+@charset "utf-8";
+
+.div1 {
+    margin-top: 80px;
+    padding: 0;
+    width: 60%;
+}
+
+.div1 ul {
+    border-radius: 15px 15px 0 0;
+    text-align: center;
+    font-size: 150%;
+}
+
+.div2 {
+    background-color: white;
+    width: 60%;
+}
+
+
+#div_id_picture {
+    margin-bottom: 16px;
+}
+
+button.cnew {
+    margin-bottom: 16px;
+}

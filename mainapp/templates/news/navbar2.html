@@ -1,0 +1,71 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">每日新聞</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        {% if request.user.is_authenticated %}
+        <li class="nav-item mx-2">
+          <a class="nav-link" href="/index/">首頁 <span class="sr-only">(current)</span></a>
+        </li>
+          {% if request.user.is_superuser %}
+          <li class="nav-item  mx-2">
+            <a class="nav-link" href="/createnew/">新增新聞</a>
+          </li>
+          {% endif %}
+        <li class="nav-item  mx-2 dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+            分類
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/index_category1/">焦點</a>
+            <a class="dropdown-item" href="/index_category2/">國際</a>
+            <a class="dropdown-item" href="/index_category3/">政治</a>
+            <a class="dropdown-item" href="/index_category4/">娛樂</a>
+            <a class="dropdown-item" href="/index_category5/">運動</a>
+            <a class="dropdown-item" href="/index_category6/">生活</a>
+            <a class="dropdown-item" href="/index_category7/">健康</a>
+            <!-- <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a> -->
+          </div>
+        </li>
+        {% else %}
+        <li class="nav-item mx-2">
+          <a class="nav-link" href="/">首頁 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item  mx-2 dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+            分類
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/guest_category1/">焦點</a>
+            <a class="dropdown-item" href="/guest_category2/">國際</a>
+            <a class="dropdown-item" href="/guest_category3/">政治</a>
+            <a class="dropdown-item" href="/guest_category4/">娛樂</a>
+            <a class="dropdown-item" href="/guest_category5/">運動</a>
+            <a class="dropdown-item" href="/guest_category6/">生活</a>
+            <a class="dropdown-item" href="/guest_category7/">健康</a>
+            <!-- <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a> -->
+          </div>
+        </li>
+        {% endif %}
+        <li class="nav-item mx-2">
+            <button class="btn btn-outline-info " onclick="window.history.back()">回上一頁</button>
+        </li>
+      </ul>
+      {% if request.user.is_authenticated %}
+      <a class="navbar-brand" href="/accountsetting/" style="padding: 0;">
+        <img src="{{request.user.profile.pictureURL}}" alt="Logo" style="width:25px;border-radius: 50%;">
+      </a>
+      <span class="navbar-text mr-4">您好，{{request.user}}</span>
+      <button class="btn btn-success my-2 my-sm-0 mr-2" onclick="window.location='/logout/'">登出</button>
+      {% else %}
+      <span class="navbar-text mx-4">您好，{{request.user}}</span>
+      <button class="btn btn-success my-2 my-sm-0 mr-2" onclick="window.location='/login/'">登入</button>
+      {% endif %}
+    </div>
+  </nav>

@@ -1,0 +1,49 @@
+{% extends 'news/base.html' %}
+{% load static %}
+{% block title %}<title>detail</title>{% endblock title %} 
+{% block css %}<link rel="stylesheet" href="{% static '/css/detail.css' %}" type="text/css">{% endblock css %}
+
+{% block content %}
+{% include 'news/navbar2.html' %}
+<div class="container div1">
+    <h1>{{new.title}}</h1>
+    <img src="{{new.pictureURL}}" class="img1">
+    <div class="div2">{{new.content|safe}}</div>   <!-- 不用safe的話會輸出html格式 -->
+    {% if request.user.is_authenticated %}
+    <div class="form-group clearfix">
+        <form action="." method="POST">
+            {% csrf_token %}
+            <ul class="list-group border0">
+                <li class="list-group-item list-group-item-success"><label for="comment">留下評論:</label></li>
+            </ul>
+            <textarea class="form-control" name="content" rows="5" id="comment"></textarea>
+            <button type="submit" class="btn btn-outline-success float-right">發佈</button>
+        </form>
+    </div>
+    {% else %}
+    <div class="clearfix">
+        <ul class="list-group border0">
+            <li class="list-group-item list-group-item-success">想發表評論嗎? 去創建帳號</li>
+        </ul>
+        <textarea class="form-control border0" name="content" rows="5" id="comment"></textarea>
+        <button type="button" class="btn btn-outline-success float-right" onclick="window.location='/register/'">註冊</button>
+    </div>
+    {% endif %}
+    <p class="p1">留言區</p>
+    <hr>
+    {% for comment in new.postcomment_set.all %}
+    <div class="comment">
+        <img src="{{comment.author.pictureURL}}" class="authorimg">
+        <div>
+            <p class="comment-author">{{comment.author}} : </p>
+            <p class="comment-body">{{comment.content}}</p>
+            <p class="comment-author2"><small>B{{forloop.counter}}，{{comment.date_created|date:"Y-m-d"}}&nbsp;&nbsp;{{new.date_created|date:'h:i'}}</small></p>
+        </div>
+    </div>
+    <hr>
+    {% empty %}
+    <p class="p2">目前沒有沒留言~~</p>
+    {% endfor %}
+</div>
+
+{% endblock content %}
