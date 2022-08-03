@@ -7,7 +7,9 @@
 {% include 'news/navbar2.html' %}
 <div class="container div1">
     <h1>{{new.title}}</h1>
-    <img src="{{new.pictureURL}}" class="img1">
+    {% if new.pictureURL != '' %}
+    <img src="{% static new.pictureURL %}" class="img1">
+    {% endif  %}
     <div class="div2">{{new.content|safe}}</div>   <!-- 不用safe的話會輸出html格式 -->
     {% if request.user.is_authenticated %}
     <div class="form-group clearfix">
@@ -33,7 +35,7 @@
     <hr>
     {% for comment in new.postcomment_set.all %}
     <div class="comment">
-        <img src="{{comment.author.pictureURL}}" class="authorimg">
+        <img src="{% static comment.author.pictureURL %}" class="authorimg">
         <div>
             <p class="comment-author">{{comment.author}} : </p>
             <p class="comment-body">{{comment.content}}</p>

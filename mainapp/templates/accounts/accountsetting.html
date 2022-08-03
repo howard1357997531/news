@@ -12,7 +12,7 @@
     </ul>
 </div>
 <div class="container border pt-4 div2">
-    <img src="{{profile.pictureURL}}" alt="">
+    <img src="{% static profile.pictureURL %}" alt="">
     <form action="." method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{form|crispy}}

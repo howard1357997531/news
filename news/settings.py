@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-w9ib*_)w(x9ia!-vy0h+bmyij-o%n6rd6fkrs41s6k2ih+^h_1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -125,13 +125,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_URL = '/images/'
-
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+
+MEDIA_URL = '/images/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'static/images')
 
 CKEDITOR_UPLOAD_PATH = "uploads/"   #ckeditor編輯器傳送檔案到的位置
 
@@ -142,8 +144,6 @@ CKEDITOR_CONFIGS = {       #改ckeditor 樣式
         'width': '100%',
     },
 }
-
-MEDIA_ROOT = os.path.join(BASE_DIR,'static/images')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
