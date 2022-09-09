@@ -62,7 +62,7 @@ ROOT_URLCONF = 'news.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,17 +129,17 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/images/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'static/images')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
-CKEDITOR_UPLOAD_PATH = "uploads/"   #ckeditor編輯器傳送檔案到的位置
+CKEDITOR_UPLOAD_PATH = "uploads/"  # ckeditor編輯器傳送檔案到的位置
 
-CKEDITOR_CONFIGS = {       #改ckeditor 樣式
+CKEDITOR_CONFIGS = {  # 改ckeditor 樣式
     'default': {
-        'toolbar': 'full',  #工具列(全滿)
+        'toolbar': 'full',  # 工具列(全滿)
         'height': 300,
         'width': '100%',
     },
@@ -149,8 +149,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "gary821121@gmail.com"
-EMAIL_HOST_PASSWORD = 'zzcsxfdqcbdhpcya'  #可使用google應用程式密碼
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ''  # 可使用google應用程式密碼
 
 # Default primary key field type
 
